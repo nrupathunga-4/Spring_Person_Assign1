@@ -36,8 +36,14 @@ public class PersonController {
 		return person.map(ResponseEntity::ok).orElseGet(()->ResponseEntity.notFound().build());
 	}
 	
-	@PutMapping("/update/{id}")
-	public ResponseEntity<Person> updatePerson(@RequestBody Person person,@PathVariable  long id)
+	@GetMapping("/gets/{adharnumber}")
+	public ResponseEntity<Person> getPersonByAdharnumber(@PathVariable(name="adharnumber")String adharnumber)
+	{
+	      Optional<Person> person=personService.getPersonByAdharnumber(adharnumber);
+	      return person.map(ResponseEntity::ok).orElseGet(()->ResponseEntity.notFound().build());
+	}
+	@PutMapping("/updates/{id}")
+	public ResponseEntity<Person> updatePerson(@RequestBody Person person,@PathVariable(name="id")long id)
 	{
 		return new ResponseEntity<Person>(personService.updatePerson(person, id),HttpStatus.OK);
 	}

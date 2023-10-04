@@ -28,6 +28,10 @@ public class PersonService {
 		return personRepository.findById(id);
 	}
 	
+	public Optional<Person> getPersonByAdharnumber(String adharnumber)
+	{
+	    return personRepository.findByAadharCard_Adharnumber(adharnumber);
+	}
 	public Person updatePerson(Person person,long id)
 	{
 		Person person2=personRepository.findById(id).orElse(null);
